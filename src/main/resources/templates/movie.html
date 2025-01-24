@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"&gt; >
+  <head th:replace="components/head :: head"></head>
+  <body>
+  	<header th:replace="components/header :: header"></header>
+  	<div th:replace="components/Movie/movieSection :: movie"></div>
+  	<div th:replace="components/Movie/similarMovies :: similarMovies"></div>
+  	<div th:replace="components/Movie/reviews :: reviews"></div>
+  	<footer th:replace="components/footer :: footer"></footer>
+  </body>
+  </html>

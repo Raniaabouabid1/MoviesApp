@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="components/head :: head"></head>
+
+<body>
+	<link rel="stylesheet" type="text/css" href="/css/homeStyle.css">
+	<header th:replace="components/header :: header"></header>
+	<div th:replace="components/homeCarousel :: homeCarousel"></div>
+	<div th:replace="components/trending :: trending"></div>
+	<div th:replace="components/album :: album"></div>
+	<footer th:replace="components/footer :: footer"></footer>
+</body>
+</html>

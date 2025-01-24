@@ -1,0 +1,36 @@
+<header class="bg-dark text-light">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="navUL">
+                    <li class="d-flex flex-row align-items-center">
+                        <a class="navbar-brand" href="#">IMDB</a>
+                        <a href="/home">Home</a><span class="hover"></span>
+                        <a href="#">Movies</a><span class="hover"></span>
+                    </li>
+                    <li class="d-flex align-items-center justify-content-center">
+                        <form action="/search" method="GET" class="d-flex w-100 justify-content-center">
+                            <input class="form-control me-2" name="searchTerm" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn text-light border ms-2" type="submit"
+                                style="border-color:rgb(199, 199, 0) !important">Search</button>
+                        </form>
+                    </li>
+                    <li class="d-flex align-items-center">
+                    	<button sec:authorize="hasRole('ROLE_ADMIN')" class="btn text-dark me-4" name="logout"
+                              style="background-color: rgb(199, 199, 0);">
+                              <a class="text-dark" th:href="@{/admin}" style="text-decoration: none">
+                              Admin Page
+                              </a>
+                          </button>
+                          <button sec:authorize="isAuthenticated()" class="btn text-dark" name="logout"
+                              style="background-color: rgb(199, 199, 0);">
+                              <a class="text-dark" th:href="@{/logout}" style="text-decoration: none">
+                              Logout
+                              </a>
+                              </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
