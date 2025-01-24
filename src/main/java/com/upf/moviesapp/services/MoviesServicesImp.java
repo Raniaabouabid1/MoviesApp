@@ -5,6 +5,8 @@ import com.upf.moviesapp.entities.Movie;
 import  com.upf.moviesapp.repositories.MovieRepository;
 import  com.upf.moviesapp.repositories.RatingRepository;
 import  com.upf.moviesapp.repositories.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.*;
@@ -98,4 +100,12 @@ public class MoviesServicesImp implements MoviesServices{
         List<Movie> deduplicatedList = new ArrayList<>(uniqueMovies);
         return deduplicatedList;
     }
+
+    public Page<Movie> searchMovies(String searchTitle, String searchDirector, Pageable pageable) {
+        if (searchTitle.isEmpty() && searchDirector.isEmpty()) {
+            return movieRep.findAll(pageable);
+        }
+        return movieRep.searchByTitleDirector("%" + searchTitle + "%", "%" + searchDirector + "%", pageable);
+    }
+
 }

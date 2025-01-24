@@ -6,5 +6,5 @@ header.css.card {
     z-index: 6;
     position: relative;
     color: white;
-    background: radial-gradient(rgb(199, 199, 0),rgb(51, 54, 45), black);
+    background: radial-gradient(rgb(199,79, 0),rgb(51, 54, 45), black);
 }

@@ -25,6 +25,14 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
+    public boolean userExistsByEmail(String email) {
+        // 'findByEmail' returns a User or null
+        User user = userRepository.findByEmail(email);
+        // Return true if user is not null
+        return user != null;
+    }
+
+    @Override
     public User save(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstname(),
                 registrationDto.getLastname(),

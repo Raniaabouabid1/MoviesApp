@@ -12,18 +12,18 @@
                         <form action="/search" method="GET" class="d-flex w-100 justify-content-center">
                             <input class="form-control me-2" name="searchTerm" type="search" placeholder="Search" aria-label="Search">
                             <button class="btn text-light border ms-2" type="submit"
-                                style="border-color:rgb(199, 199, 0) !important">Search</button>
+                                style="border-color:rgb(199, 79, 0) !important">Search</button>
                         </form>
                     </li>
                     <li class="d-flex align-items-center">
                     	<button sec:authorize="hasRole('ROLE_ADMIN')" class="btn text-dark me-4" name="logout"
-                              style="background-color: rgb(199, 199, 0);">
+                              style="background-color: rgb(199, 79, 0);">
                               <a class="text-dark" th:href="@{/admin}" style="text-decoration: none">
                               Admin Page
                               </a>
                           </button>
                           <button sec:authorize="isAuthenticated()" class="btn text-dark" name="logout"
-                              style="background-color: rgb(199, 199, 0);">
+                              style="background-color: rgb(199, 79, 0);">
                               <a class="text-dark" th:href="@{/logout}" style="text-decoration: none">
                               Logout
                               </a>

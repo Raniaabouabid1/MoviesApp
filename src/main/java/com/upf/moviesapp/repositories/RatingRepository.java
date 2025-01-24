@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Long> {
     @Query("SELECT SUM(r.rating) FROM Rating r WHERE r.movie.id = :movie_id")
@@ -17,4 +19,11 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
     public Long countByMovieId(Long movie_id);
 
     public Rating getByUserIdAndMovieId(Long user_id, Long movie_id);
+
+    @Query("SELECT COALESCE(AVG(r.rating), 0) FROM Rating r")
+    Optional<Double> findAverageRating();
+
+    long countByRating(int rating);
+
+
 }

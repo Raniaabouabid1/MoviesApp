@@ -13,13 +13,19 @@
 </head>
 <body class="flex h-screen m-0 p-0">
 
-<div class="w-1/2 bg-light text-black flex flex-col justify-center items-center p-10">
-	<h1 class="text-4xl font-bold mb-10">User Login Page</h1>
+<div class="w-1/2 bg-light text-red-700 flex flex-col justify-center items-center p-10">
+	<h1 class="text-4xl font-bold mb-10">Welcome back to IMDB !</h1>
 	<div th:if="${param.error}"
 		 class="p-2 mb-4 text-sm text-red-800 w-1/2 rounded-3xl bg-[#ffdbdc]
                 flex justify-center items-center"
 		 role="alert">
 		<span class="font-bold">Invalid username or password.</span>
+	</div>
+	<div th:if="${param.regsuccess}"
+		 class="p-2 mb-4 text-sm text-green-700 w-1/2 rounded-3xl bg-green-100
+                flex justify-center items-center"
+		 role="alert">
+		<span class="font-bold">Registration successful! Start your special experience.</span>
 	</div>
 	<div th:if="${param.logout}"
 		 class="p-2 mb-4 text-sm text-green-700 w-1/2 rounded-3xl bg-green-100
@@ -63,22 +69,22 @@
 			</div>
 		</div>
 
-		<button class="w-full py-3 rounded-full bg-yellow-500 text-white text-sm
-                     font-semibold hover:bg-blue-600">
+		<button class="w-full py-3 rounded-full bg-yellow-600 text-white text-sm
+                     font-semibold hover:bg-yellow-500">
 			Log In
 		</button>
 	</form>
 	<div class="mt-4">
       <span class="text-sm text-gray-400">
         New user?
-        <a th:href="@{/registration}" class="text-yellow-500 hover:underline">
+        <a th:href="@{/registration}" class="text-yellow-700 hover:underline">
           Register here
         </a>
       </span>
 	</div>
 </div>
 <div class="w-1/2 bg-gray-200 flex items-center justify-center">
-	<img th:src="@{/images/6.jpg}" alt="Illustration"  />
+	<img th:src="@{/images/log.jpg}" alt="Illustration"  />
 </div>
 </body>
 </html>

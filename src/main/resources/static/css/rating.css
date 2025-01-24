@@ -1,5 +1,5 @@
 .rating-wrapper {
-    box-shadow: 1px 1px 10px #c7c700;
+    box-shadow: 1px 1px 10px #C74F09;
     border-radius: 5rem;
     display: inline-flex;
     direction: rtl !important;
@@ -20,21 +20,21 @@
     label:hover,
     label:hover ~ label,
     input:checked ~ label  {
-        color: #ffd43b;
+        color: #C74F09;
     }
 
     label:hover,
     label:hover ~ label,
     input:checked ~ label  {
-        color: #ffd43b;
+        color: #C74F09;
     }
 }
 
 #btn {
-    box-shadow: 1px 1px 10px #c7c700;
+    box-shadow: 1px 1px 10px #C74F09;
     border-radius: 5rem;
 }
 
 #revTextArea {
-	box-shadow: 2px 2px 20px #c7c700;
+	box-shadow: 2px 2px 20px #C74F09;
 }

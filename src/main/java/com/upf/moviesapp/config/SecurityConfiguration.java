@@ -23,13 +23,9 @@ public class SecurityConfiguration {
 
     private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
-    public SecurityConfiguration(AuthenticationSuccessHandler customAuthenticationSuccessHandler ) {
-
+    public SecurityConfiguration(AuthenticationSuccessHandler customAuthenticationSuccessHandler) {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
     }
-
-
-
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -38,11 +34,9 @@ public class SecurityConfiguration {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(userServices);
         auth.setPasswordEncoder(passwordEncoder());
-
         return auth;
     }
 
@@ -50,42 +44,33 @@ public class SecurityConfiguration {
     public void configure(AuthenticationManagerBuilder auth, HttpSecurity http) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize ->
-                        authorize
-                                .requestMatchers(
-                                        "/registration**",
-                                        "/js/**",
-                                        "/css/**",
-                                        "/img/**",
-                                        "/error/**").permitAll()
-                                .requestMatchers("/movie/**").hasAnyRole("ADMIN", "USER")
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/adminMovies/**").hasRole("ADMIN")
-                                .anyRequest().authenticated()
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/registration**", "/error/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/movie/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/adminMovies/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .formLogin(formLogin ->
-                        formLogin
-                                .loginPage("/login")
-                                .successHandler(customAuthenticationSuccessHandler) // Use custom success handler
-                                .permitAll()
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .successHandler(customAuthenticationSuccessHandler)
+                        .permitAll()
                 )
-                .logout(logout ->
-                        logout
-                                .invalidateHttpSession(true)
-                                .clearAuthentication(true)
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .logoutSuccessUrl("/login?logout")
-                                .permitAll()
+                .logout(logout -> logout
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
                 )
-                .exceptionHandling(exception ->
-                        exception
-                                .accessDeniedPage("/error/403")
+                .exceptionHandling(exception -> exception
+                        .accessDeniedPage("/error/403")
                 );
+
         return http.build();
     }
 }

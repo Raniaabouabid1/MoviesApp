@@ -1,140 +1,150 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Admin Home</title>
-	<link rel="stylesheet"
-		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-		  crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="Style.css"/>
-	<style>
-
-		#wrapper {
-			position: relative;
-		}
-		#sidebar-wrapper {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 60px;
-			height: 100vh;
-			background: #000;
-			overflow-x: hidden;
-			overflow-y: auto;
-			transition: width 0.3s ease;
-			z-index: 1000;
-		}
-
-		#sidebar-wrapper:hover {
-			width: 220px;
-		}
-		.sidebar-nav {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			position: relative;
-			height: 100%;
-		}
-
-		.sidebar-nav li a {
-			display: block;
-			color: #ddd;
-			text-decoration: none;
-			padding: 10px 15px;
-			white-space: nowrap;
-		}
-
-		.sidebar-nav li a:hover {
-			background: #333;
-			color: #fff;
-		}
-		.sidebar-nav li a .glyphicon {
-			font-size: 18px;
-			vertical-align: middle;
-		}
-		.sidebar-nav li a .text {
-			display: none;
-			margin-left: 10px;
-			vertical-align: middle;
-		}
-		#sidebar-wrapper:hover .sidebar-nav li a .text {
-			display: inline-block;
-		}
-		.sidebar-nav li.logout {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-		}
-		#page-content-wrapper {
-			margin-left: 60px;
-			transition: margin-left 0.3s ease;
-		}
-		#sidebar-wrapper:hover + #page-content-wrapper {
-			margin-left: 220px;
-		}
-	</style>
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- (Optional) jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body>
-<div id="wrapper">
-	<div id="sidebar-wrapper">
-		<ul class="sidebar-nav">
-			<li class="sidebar-brand">
-				<a href="#">
-					<span class="glyphicon glyphicon-cog"></span>
-					<span class="text">Admin Panel</span>
-				</a>
-			</li>
+<body class="m-0 p-0 flex">
 
-			<li>
-				<a th:href="@{/home}">
-					<span class="glyphicon glyphicon-home"></span>
-					<span class="text">Home</span>
-				</a>
-			</li>
-			<li>
-				<a th:href="@{/adminUsers}">
-					<span class="glyphicon glyphicon-user"></span>
-					<span class="text">User Management</span>
-				</a>
-			</li>
-			<li>
-				<a th:href="@{/adminMovies}">
-					<span class="glyphicon glyphicon-film"></span>
-					<span class="text">Movies Management</span>
-				</a>
-			</li>
-			<li class="logout">
-				<a th:href="@{/logout}">
-					<span class="glyphicon glyphicon-log-out"></span>
-					<span class="text">Logout</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div id="page-content-wrapper">
-		<div class="container" style="margin-top: 20px;">
-			<h1 class="text-center">Admin Home Page</h1>
-			<p>
-				Welcome,
-				<span th:text="${firstname}" style="color: red;"></span>
-				<span th:text="${lastname}" style="color: red;"></span><br>
-				with the ID: <span th:text="${ID}"></span>!
-			</p>
-			<a class="btn btn-primary" th:href="@{/adminMovies}" style="margin-top: 20px;">
-				Manage Movies
-			</a>
+<!-- Sidebar -->
+<aside
+		class="group relative
+           w-16 hover:w-64  /* Collapsed vs. expanded width */
+           transition-all duration-300
+           bg-black text-gray-100
+           shadow-md flex flex-col justify-between
+           h-screen"
+		id="sidebar"
+>
+	<div>
+		<!-- Logo -->
+		<div class="py-4 flex justify-center">
+			<img th:src="@{/images/userlogo.png}"
+				 alt="Logo"
+				 class="transition-all duration-300 w-8 group-hover:w-12" />
 		</div>
+
+		<!-- Nav -->
+		<nav class="mt-6">
+			<ul class="space-y-2">
+				<!-- Display user name on hover -->
+				<li class="flex justify-center group-hover:justify-start px-5 py-2">
+            <span class="hidden group-hover:block font-bold text-sm"
+				  th:text="${firstname + ' '+ lastname}"></span>
+				</li>
+				<li class="hover:bg-gray-700 flex items-center px-5 py-2">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 class="h-5 w-5"
+						 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round"
+							  stroke-linejoin="round"
+							  stroke-width="2"
+							  d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9.75h15V10.5" />
+					</svg>
+					<a th:href="@{/admin}" class="ml-4 text-sm hidden group-hover:inline-block">
+						Home of admin
+					</a>
+				</li>
+				<!-- Home -->
+				<li class="hover:bg-gray-700 flex items-center px-5 py-2">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 class="h-5 w-5"
+						 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round"
+							  stroke-linejoin="round"
+							  stroke-width="2"
+							  d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9.75h15V10.5" />
+					</svg>
+					<a th:href="@{/home}" class="ml-4 text-sm hidden group-hover:inline-block">
+						Movie Display
+					</a>
+				</li>
+
+
+				<!-- Movies Management -->
+				<li class="hover:bg-gray-700 flex items-center px-5 py-2">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						 class="h-5 w-5"
+						 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round"
+							  stroke-linejoin="round"
+							  stroke-width="2"
+							  d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M8 6h8m-8-2h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+					</svg>
+					<a th:href="@{/adminMovies}" class="ml-4 text-sm hidden group-hover:inline-block">
+						Movies Management
+					</a>
+				</li>
+
+				<li class="hover:bg-gray-700 flex items-center px-5 py-2">
+					<img th:src="@{/images/dashboard.png}" alt="Dashboard Icon" class="w-5 h-5 mb-4">
+					<a th:href="@{/dashboard}" class="ml-4 text-sm hidden group-hover:inline-block">
+						Dashboard
+					</a>
+				</li>
+
+			</ul>
+		</nav>
 	</div>
+
+	<!-- Logout -->
+	<div class="py-4 px-4 flex justify-center group-hover:justify-start">
+		<a th:href="@{/logout}"
+		   class="flex items-center gap-2 text-gray-300 hover:text-white">
+			<svg xmlns="http://www.w3.org/2000/svg"
+				 class="h-5 w-5"
+				 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round"
+					  stroke-linejoin="round"
+					  stroke-width="2"
+					  d="M17 16l4-4m0 0l-4-4m4 4H7" />
+			</svg>
+			<span class="hidden group-hover:block text-sm">Logout</span>
+		</a>
+	</div>
+</aside>
+
+<div class="flex-1 flex flex-col items-center justify-center overflow-auto p-6">
+
+	<section class="text-center">
+		<img src="images/movie.png" alt="logo"
+			 class="mx-auto w-32 h-32 mt-2 max-w-xs rounded-l-lg" />
+		<h2 class="text-4xl font-medium text-orange-400 m-4">
+			Bienvenue sur IMDB !
+		</h2>
+		<p class="text-xl text-gray-600 m-2 max-w-2xl mx-auto">
+			Découvrez une application innovante conçue pour simplifier
+			la gestion des recommandations de films
+		</p>
+	</section>
+	<section class="mt-8 w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+		<div class="bg-[#E5E5E5] shadow-md rounded-lg p-6 flex flex-col items-center">
+			<img th:src="@{/images/dash.png}" alt="Dashboard Icon" class="w-12 h-12 mb-4">
+			<h3 class="text-xl font-semibold text-gray-700 mb-2">Dashboard</h3>
+			<p class="text-sm text-gray-600 text-center">
+				Accédez aux statistiques globales de l'application et
+				surveillez les indicateurs clés.
+			</p>
+		</div>
+		<div class="bg-[#E5E5E5] shadow-md rounded-lg p-6 flex flex-col items-center">
+			<img th:src="@{/images/users.png}" alt="Library Icon" class="w-12 h-12 mb-4">
+			<h3 class="text-xl font-semibold text-gray-700 mb-2">Gestion des utilisateurs</h3>
+			<p class="text-sm text-gray-600 text-center">
+				Explorez et gérez les utilisateurs existant dans votre application.
+			</p>
+		</div>
+		<div class="bg-[#E5E5E5] shadow-md rounded-lg p-6 flex flex-col items-center">
+			<img th:src="@{/images/film.png}" alt="Assignment Icon" class="w-12 h-12 mb-4">
+			<h3 class="text-xl font-semibold text-gray-700 mb-2">Gestion des Films</h3>
+			<p class="text-sm text-gray-600 text-center">
+				Supervisez et gérez vos films pour faire plaisir a vos utilisateurs et apporter des nouvautés.
+			</p>
+		</div>
+	</section>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
-		integrity="sha384-ZosEbRLbNQzLpnKIkE7R6AB/Ez6Olq5hPb6xZfQv7zUzzVfIMUdKz9MImH8W0h2c"
-		crossorigin="anonymous">
-</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfKgcK1Eh4eMDyV0CqMcqVFXJAdOx2mQy5nlg6PFa"
-		crossorigin="anonymous">
-</script>
 </body>
 </html>

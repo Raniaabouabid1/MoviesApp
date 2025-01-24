@@ -6,6 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,15 +42,28 @@ public class AdminMovieController {
         this.genreRep = genreRep;
     }
 
-
     private final String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/images";
+    @GetMapping({"", "/"})
+    public String listMovies(Model model,
+                             @RequestParam(defaultValue = "") String searchTitle,
+                             @RequestParam(defaultValue = "") String searchDirector,
+                             @RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "6") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
 
+        Page<Movie> moviesPage;
+        if (searchTitle.isEmpty() && searchDirector.isEmpty()) {
+            moviesPage = movieRep.findAllPaged(pageable);
+        } else {
+            moviesPage = movieRep.searchByTitleDirector(searchTitle, searchDirector, pageable);
+        }
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("size", size);
+        model.addAttribute("searchTitle", searchTitle);
+        model.addAttribute("searchDirector", searchDirector);
 
-    @GetMapping({"","/"})
-    public String listMovies(Model model) {
-        MoviesServicesImp movieService = new MoviesServicesImp(movieRep);
-        List<Movie> movies = movieService.getAllMovies();
-        model.addAttribute("movies", movies);
         return "adminMovies/index";
     }
 
@@ -58,8 +75,6 @@ public class AdminMovieController {
         model.addAttribute("genres", genres);
         return "adminMovies/createMovie";
     }
-
-
 
     @PostMapping
     public String CreateMovie(
