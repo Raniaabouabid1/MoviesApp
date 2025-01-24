@@ -1,0 +1,153 @@
+<!-- File: sidebar.html -->
+<div th:fragment="sidebar">
+    <div id="sidebar-wrapper"
+         style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 100vh;
+            background: #000;
+            overflow-x: hidden;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+            z-index: 1000;
+         ">
+        <ul class="sidebar-nav"
+            style="
+               list-style: none;
+               margin: 0;
+               padding: 0;
+               position: relative;
+               height: 100%;
+            ">
+
+            <!-- Example brand/title -->
+            <li class="sidebar-brand">
+                <a href="#"
+                   style="
+                     display: block;
+                     color: #ddd;
+                     text-decoration: none;
+                     padding: 10px 15px;
+                     white-space: nowrap;
+                   ">
+                    <span class="glyphicon glyphicon-cog"
+                          style="font-size:18px; vertical-align:middle;">
+                    </span>
+                    <!-- Hidden text; shown on hover -->
+                    <span class="text"
+                          style="
+                            display:none;
+                            margin-left:10px;
+                            vertical-align:middle;
+                          ">
+                        Admin Panel
+                    </span>
+                </a>
+            </li>
+
+            <!-- Home -->
+            <li>
+                <a th:href="@{/home}"
+                   style="
+                     display:block;
+                     color: #ddd;
+                     text-decoration:none;
+                     padding:10px 15px;
+                     white-space:nowrap;
+                   ">
+                    <span class="glyphicon glyphicon-home"
+                          style="font-size:18px; vertical-align:middle;">
+                    </span>
+                    <span class="text"
+                          style="
+                            display:none;
+                            margin-left:10px;
+                            vertical-align:middle;
+                          ">
+                        Home
+                    </span>
+                </a>
+            </li>
+
+            <!-- User Management -->
+            <li>
+                <a th:href="@{/adminUsers}"
+                   style="
+                     display:block;
+                     color: #ddd;
+                     text-decoration:none;
+                     padding:10px 15px;
+                     white-space:nowrap;
+                   ">
+                    <span class="glyphicon glyphicon-user"
+                          style="font-size:18px; vertical-align:middle;">
+                    </span>
+                    <span class="text"
+                          style="
+                            display:none;
+                            margin-left:10px;
+                            vertical-align:middle;
+                          ">
+                        User Management
+                    </span>
+                </a>
+            </li>
+
+            <!-- Movies Management -->
+            <li>
+                <a th:href="@{/adminMovies}"
+                   style="
+                     display:block;
+                     color: #ddd;
+                     text-decoration:none;
+                     padding:10px 15px;
+                     white-space:nowrap;
+                   ">
+                    <span class="glyphicon glyphicon-film"
+                          style="font-size:18px; vertical-align:middle;">
+                    </span>
+                    <span class="text"
+                          style="
+                            display:none;
+                            margin-left:10px;
+                            vertical-align:middle;
+                          ">
+                        Movies Management
+                    </span>
+                </a>
+            </li>
+
+            <!-- Logout pinned at bottom -->
+            <li class="logout"
+                style="
+                  position:absolute;
+                  bottom:0;
+                  left:0;
+                  width:100%;
+                ">
+                <a th:href="@{/logout}"
+                   style="
+                     display:block;
+                     color: #ddd;
+                     text-decoration:none;
+                     padding:10px 15px;
+                     white-space:nowrap;
+                   ">
+                    <span class="glyphicon glyphicon-log-out"
+                          style="font-size:18px; vertical-align:middle;">
+                    </span>
+                    <span class="text"
+                          style="
+                            display:none;
+                            margin-left:10px;
+                            vertical-align:middle;
+                          ">
+                        Logout
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
