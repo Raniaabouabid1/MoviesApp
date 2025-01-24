@@ -1,0 +1,32 @@
+.navbar-inverse{
+  background: black !important;
+  border-bottom:4px solid rgb(199, 199, 0) !important;
+}
+
+.nav{
+  margin-bottom:0px;
+  a{
+    font:500 11px Lato;
+    letter-spacing:2px;
+    padding:16px !important;
+    color:white !important;
+    text-decoration: none;
+    text-transform:uppercase;
+    z-index:1000;
+  }
+  a:hover{
+    color:#FFF !important;
+  }
+}
+
+
+.navbar-nav {
+  width: 100%;
+}
+
+#navUL {
+	display: flex !important;
+	flex-direction: row !important;
+	justify-content: space-between !important;
+	margin-right: 955px;
+}

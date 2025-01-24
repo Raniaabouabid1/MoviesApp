@@ -1,0 +1,40 @@
+.rating-wrapper {
+    box-shadow: 1px 1px 10px #c7c700;
+    border-radius: 5rem;
+    display: inline-flex;
+    direction: rtl !important;
+    padding: 1rem 2rem;
+
+
+    label {
+        color: #E1E6F6;
+        cursor: pointer;
+        display: inline-flex;
+        transition: color 0.5s;
+    }
+
+   input {
+        display: none;
+    }
+
+    label:hover,
+    label:hover ~ label,
+    input:checked ~ label  {
+        color: #ffd43b;
+    }
+
+    label:hover,
+    label:hover ~ label,
+    input:checked ~ label  {
+        color: #ffd43b;
+    }
+}
+
+#btn {
+    box-shadow: 1px 1px 10px #c7c700;
+    border-radius: 5rem;
+}
+
+#revTextArea {
+	box-shadow: 2px 2px 20px #c7c700;
+}

@@ -1,0 +1,10 @@
+header.css.card {
+    border-radius: .7rem;
+}
+
+.bg_blur {
+    z-index: 6;
+    position: relative;
+    color: white;
+    background: radial-gradient(rgb(199, 199, 0),rgb(51, 54, 45), black);
+}

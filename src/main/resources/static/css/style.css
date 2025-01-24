@@ -1,0 +1,18 @@
+/* styles.css */
+.carousel-movie:hover {
+    cursor: pointer;
+}
+.card {
+    border-radius: 15px 15px 15px 15px !important;
+}
+
+.card img {
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px !important;
+}
+
+
+
+
+
+
