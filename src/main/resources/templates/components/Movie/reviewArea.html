@@ -1,0 +1,93 @@
+<div th:fragment="reviewArea" class="d-flex flex-row justify-content-center align-items-center">
+    <form class="d-flex flex-row">
+        <div class="px-5 d-flex flex-column justify-content-center align-items-center">
+            <div class="form-group pb-3 d-flex flex-column justify-content-center align-items-center">
+                <textarea class="form-control" id="revTextArea" rows="5" cols="50"
+                    style="border-radius: 2em"></textarea>
+            </div>
+            <div class="container d-flex align-items-center justify-content-center pb-3">
+                <div class="row justify-content-center">
+
+                    <!-- star rating -->
+                    <div class="rating-wrapper">
+
+                        <!-- star 5 -->
+                        <input type="radio" id="5-star-rating-rev" name="star-rating-rev" value="5">
+                        <label for="5-star-rating-rev" class="star-rating">
+                            <i class="fas fa-star d-inline-block"></i>
+                        </label>
+
+                        <!-- star 4 -->
+                        <input type="radio" id="4-star-rating-rev" name="star-rating-rev" value="4">
+                        <label for="4-star-rating-rev" class="star-rating star">
+                            <i class="fas fa-star d-inline-block"></i>
+                        </label>
+
+                        <!-- star 3 -->
+                        <input type="radio" id="3-star-rating-rev" name="star-rating-rev" value="3">
+                        <label for="3-star-rating-rev" class="star-rating star">
+                            <i class="fas fa-star d-inline-block"></i>
+                        </label>
+
+                        <!-- star 2 -->
+                        <input type="radio" id="2-star-rating-rev" name="star-rating-rev" value="2">
+                        <label for="2-star-rating-rev" class="star-rating star">
+                            <i class="fas fa-star d-inline-block"></i>
+                        </label>
+
+                        <!-- star 1 -->
+                        <input type="radio" id="1-star-rating-rev" name="star-rating-rev" value="1">
+                        <label for="1-star-rating-rev" class="star-rating star">
+                            <i class="fas fa-star d-inline-block"></i>
+                        </label>
+
+                    </div>
+
+                </div>
+            </div>
+            <button type="button" id="btn" class="btn rounded-pill bg-dark text-light">Submit rating</button>
+
+            <script>
+                document.getElementById('btn').addEventListener('click', () => {
+                    let stars = document.querySelectorAll('input[name="star-rating-rev"]');
+                    let selectedValue = null;
+                    let textArea = document.getElementById('revTextArea');
+
+                    for (let i = 0; i < stars.length; i++) {
+                        if (stars[i].checked) {
+                            selectedValue = stars[i].value;
+                            break;
+                        }
+                    }
+                    console.log(selectedValue);
+
+                    if (selectedValue !== null && textArea.value.length > 10) {
+                        const url = window.location.search;
+                        const urlParams = new URLSearchParams(url);
+                        if (urlParams.has('id')) {
+                            const id = urlParams.get('id');
+                            fetch('/movie/review', {
+                                method: 'POST',
+                                headers: {
+                                	'Content-type': 'application/json',
+                                	[csrfTokenName]: csrfToken
+                                },
+                                body: JSON.stringify({movie_id: id, rating: selectedValue, review: textArea.value })
+                            }).then((resp) => {
+                                return resp.json();
+                            }).then((resp) => {
+                                let message = 'Failed to submit';
+                                if (resp.status === 'Success')
+                                    message = `Successfully submitted a rating of ${selectedValue} stars`;
+                                 alert(message);
+								location.reload();
+                            })
+                        }
+                    } else {
+                        alert("No stars were selected");
+                    }
+                });
+            </script>
+        </div>
+    </form>
+</div>

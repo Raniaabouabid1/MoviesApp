@@ -1,0 +1,18 @@
+<div th:fragment="reviewModal" class="mb-3 mb-lg-0 d-flex flex-row align-items-center justify-content-between w-100">
+    <h3 class="mb-0">Reviews</h3>
+    <button type="button" class="btn text-dark" style="background-color: rgb(199, 199, 0);" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Leave a review</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel" style="align-self: center">Leave a review for <span th:text="${movie.title}" class="text-warning"></span></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div th:replace="components/Movie/reviewArea :: reviewArea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

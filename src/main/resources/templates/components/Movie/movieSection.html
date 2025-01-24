@@ -1,0 +1,54 @@
+
+  <div th:fragment="movie">
+    <section class="bg_blur" style="height: 750px">
+      <section style="width: 1000px; padding: 0; padding-top: 50px; margin: auto;">
+        <div class="px-4 d-flex justify-content-between">
+          <div class=" d-flex flex-column">
+            <p class="h2" id="movie_title" th:text="${movie.title}"></p>
+            <p class="h5" id="release_date" th:text="${movie.releasedate + ' - ' + movie.getHourLength}"></p>
+          </div>
+          <div class=" d-flex flex-column align-items-center justify-content-center me-5">
+            <p class="h5">Rating</p>
+            <div th:with="rating=${rating}" class="d-flex flex-row" id="stars">
+              <i th:if="${rating > 0}" th:each="i : ${#numbers.sequence(1, rating)}" class="fa-solid fa-star" style="color: #FFD43B;"></i>
+              <i th:if="${rating < 5}" th:each="i : ${#numbers.sequence(1, 5 - rating)}" class="fa-regular fa-star"
+                style="color: #FFD43B;"></i>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid row" style="height: 350px;">
+          <div class="col-3">
+            <img class="img-fluid" style="height: 350px; object-fit: cover" th:src="${movie.poster}" alt="">
+          </div>
+          <div class="col-9">
+            <img class="img-fluid" style="height: 350px; width: 800px; object-fit: fill"
+              th:src="${movie.panoramicPoster}" alt="">
+          </div>
+        </div>
+      </section>
+      <section class="row my-3" style="width: 1000px; margin: auto">
+        <div class="col-9">
+          <div class="d-flex flex-row my-3 gap-2" id="buttons_div">
+            <button th:each="genre : ${movie.genres}" th:text="${genre.genre}" type="button"
+              class="btn border border-light rounded-pill text-light"></button>
+          </div>
+          <div id="description">
+            <p th:text="${movie.description}"></p>
+          </div>
+          <div id="info">
+            <p class="h5" id="director"><b>Director:</b><span class="h5" th:text="${movie.director}"></span></p>
+            <div class="d-flex flex-row">
+              <p class="h5"><b>Cast:</b>
+                <span th:text="${movie.getPrimaryCast}" class="h5"></span>
+              </p>
+              <a id="cast" class="h5" href="#" style="text-decoration:none;">
+                <i class="fa-solid  fa-arrow-right ms-5 "></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+<div th:replace="/components/Movie/rate :: ratingDiv"></div>
+      </section>
+    </section>
+  </div>

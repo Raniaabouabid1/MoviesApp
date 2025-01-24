@@ -1,0 +1,95 @@
+<div th:fragment="ratingDiv" class="col-3 d-flex flex-column justify-content-center align-items-center  mt-5">
+    <p class="h5 py-2">Your rating</p>
+
+
+    <div class="d-flex align-items-center justify-content-center pb-3">
+        <div class="row justify-content-center">
+
+            <!-- star rating -->
+            <div class="rating-wrapper">
+
+                <!-- star 5 -->
+                <input type="radio" id="5-star-rating" name="star-rating" value="5">
+                <label for="5-star-rating" class="star-rating">
+                    <i class="fas fa-star d-inline-block"></i>
+                </label>
+
+                <!-- star 4 -->
+                <input type="radio" id="4-star-rating" name="star-rating" value="4">
+                <label for="4-star-rating" class="star-rating star">
+                    <i class="fas fa-star d-inline-block"></i>
+                </label>
+
+                <!-- star 3 -->
+                <input type="radio" id="3-star-rating" name="star-rating" value="3">
+                <label for="3-star-rating" class="star-rating star">
+                    <i class="fas fa-star d-inline-block"></i>
+                </label>
+
+                <!-- star 2 -->
+                <input type="radio" id="2-star-rating" name="star-rating" value="2">
+                <label for="2-star-rating" class="star-rating star">
+                    <i class="fas fa-star d-inline-block"></i>
+                </label>
+
+                <!-- star 1 -->
+                <input type="radio" id="1-star-rating" name="star-rating" value="1">
+                <label for="1-star-rating" class="star-rating star">
+                    <i class="fas fa-star d-inline-block"></i>
+                </label>
+
+            </div>
+
+        </div>
+    </div>
+    <button type="button" id="ratingSubmit" class="btn rounded-pill" style="background-color: #c7c700">submit</button>
+    <script>
+    	function getCsrfToken(){
+    	   return document.querySelector('meta[name=_csrf_token]').content;
+    	}
+
+    	function getCsrfTokenName(){
+    	   return document.querySelector('meta[name=_csrf_header_name]').content;
+    	}
+    	 
+    	let csrfToken = this.getCsrfToken();
+    	let csrfTokenName = this.getCsrfTokenName();
+    	
+        document.getElementById('ratingSubmit').addEventListener('click', () => {
+            let stars = document.querySelectorAll('input[name="star-rating"]');
+            let selectedValue = null;
+
+            for (let i = 0; i < stars.length; i++) {
+                if (stars[i].checked) {
+                    selectedValue = stars[i].value;
+                    break;
+                }
+            }
+
+            if (selectedValue !== null) {
+                const url = window.location.search;
+                const urlParams = new URLSearchParams(url);
+                if (urlParams.has('id')) {
+	                const id = urlParams.get('id');
+	                fetch("/movie/rate", {
+	                    method: 'POST',
+	                    headers: {
+	                    	'Content-type' : 'application/json',
+	                    	[csrfTokenName]: csrfToken
+	                    },
+	                    body: JSON.stringify({movie_id : id, rating : selectedValue})
+	                }).then((resp) => {
+	                    return resp.text();
+	                }).then((resp) => {
+	                    let message = 'Failed to submit';
+	                    if (resp === 'Success')
+	                        message = `Successfully submitted a rating of ${selectedValue} stars`;
+	                    alert(message)
+	                })
+                }
+            } else {
+            	alert("No stars were selected");
+            }
+        });
+    </script>
+</div>
