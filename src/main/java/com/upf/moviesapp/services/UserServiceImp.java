@@ -14,10 +14,8 @@ import com.upf.moviesapp.security.CustomUserDetails;
 @Service
 public class UserServiceImp implements UserServices {
 
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-
 
     public UserServiceImp(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -26,9 +24,7 @@ public class UserServiceImp implements UserServices {
 
     @Override
     public boolean userExistsByEmail(String email) {
-        // 'findByEmail' returns a User or null
         User user = userRepository.findByEmail(email);
-        // Return true if user is not null
         return user != null;
     }
 
@@ -42,8 +38,6 @@ public class UserServiceImp implements UserServices {
 
         return userRepository.save(user);
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

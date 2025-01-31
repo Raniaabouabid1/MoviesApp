@@ -22,7 +22,6 @@ public class ReviewServicesImp implements ReviewServices {
     public int getTotalReviews(Movie movie) {
         return reviewRep.countByMovieId(movie.getId());
     }
-
     @Override
     public Review createReview(Long user_id, Long movie_id, String review) {
         User user = userRep.getById(user_id);

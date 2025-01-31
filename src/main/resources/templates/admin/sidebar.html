@@ -1,4 +1,3 @@
-<!-- File: sidebar.html -->
 <div th:fragment="sidebar">
     <div id="sidebar-wrapper"
          style="
@@ -21,8 +20,6 @@
                position: relative;
                height: 100%;
             ">
-
-            <!-- Example brand/title -->
             <li class="sidebar-brand">
                 <a href="#"
                    style="
@@ -35,7 +32,6 @@
                     <span class="glyphicon glyphicon-cog"
                           style="font-size:18px; vertical-align:middle;">
                     </span>
-                    <!-- Hidden text; shown on hover -->
                     <span class="text"
                           style="
                             display:none;
@@ -46,8 +42,6 @@
                     </span>
                 </a>
             </li>
-
-            <!-- Home -->
             <li>
                 <a th:href="@{/home}"
                    style="
@@ -70,8 +64,6 @@
                     </span>
                 </a>
             </li>
-
-            <!-- User Management -->
             <li>
                 <a th:href="@{/adminUsers}"
                    style="
@@ -94,8 +86,6 @@
                     </span>
                 </a>
             </li>
-
-            <!-- Movies Management -->
             <li>
                 <a th:href="@{/adminMovies}"
                    style="
@@ -118,8 +108,6 @@
                     </span>
                 </a>
             </li>
-
-            <!-- Logout pinned at bottom -->
             <li class="logout"
                 style="
                   position:absolute;

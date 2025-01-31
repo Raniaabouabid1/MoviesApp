@@ -100,7 +100,6 @@ public class MoviesServicesImp implements MoviesServices{
         List<Movie> deduplicatedList = new ArrayList<>(uniqueMovies);
         return deduplicatedList;
     }
-
     public Page<Movie> searchMovies(String searchTitle, String searchDirector, Pageable pageable) {
         if (searchTitle.isEmpty() && searchDirector.isEmpty()) {
             return movieRep.findAll(pageable);

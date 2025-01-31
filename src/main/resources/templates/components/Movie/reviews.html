@@ -1,6 +1,5 @@
 <div th:fragment="reviews">
     <section class="container-fluid py-5" style="width: 1000px; margin: auto">
-        <!-- Reviews -->
         <div class="mb-3">
             <h3 class="mb-4">Watcher Reviews</h3>
             <div class="row align-items-center">
@@ -9,8 +8,6 @@
                     <h3 th:text="${rating}" class="display-2 fw-bold"></h3>
                     <p th:text="${'Based on ' + totalRatings + ' rating(s)'}" class="mb-0 fs-6"></p>
                 </div>
-
-                <!-- Progress Bar -->
                 <div class="col pt-3 order-3 order-md-2">
                     <div th:each="per: ${percent}" class="progress mb-3" style="height: 6px;">
                         <div class="progress-bar bg-warning" role="progressbar" th:style="${'width: ' + per + '%'}"
@@ -18,25 +15,18 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-auto col-6 order-2 order-md-3">
-                    <!-- Rating -->
                     <div th:each="per: ${percent}">
                         <span th:text="${per + '%'}" class="ms-1"></span>
                     </div>
                 </div>
             </div>
-
         </div>
-
         <hr class="my-5">
         <div class="mb-3">
             <div class="d-lg-flex align-items-center justify-content-between mb-5">
-                <!-- Reviews -->
                 <div th:replace="components/Movie/reviewModal :: reviewModal"></div>
-
             </div>
-            <!-- Rating -->
             <div th:if="${#arrays.length(movie.reviews) > 0}" th:each="review : ${movie.reviews}"
                 class="d-flex align-items-start border-bottom pb-4 mb-4" id="revArea">
                 <img src="/images/profile.png" alt="" class="rounded-circle avatar-lg">
@@ -53,14 +43,12 @@
                     </div>
                 </div>
             </div>
-
             <div th:if="${#arrays.length(movie.reviews) == 0}" class="d-flex align-items-start border-bottom pb-4 mb-4">
                 <img src="/images/profile.png" alt="" class="rounded-circle avatar-lg">
                 <div class="ms-3">
                     <h4 class="mb-1">Users have yet to review this movie</h4>
                 </div>
             </div>
-
         </div>
     </section>
 </div>

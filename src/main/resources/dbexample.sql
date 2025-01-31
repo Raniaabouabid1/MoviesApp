@@ -283,14 +283,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `f_name`, `l_name`, `email`, `password`) VALUES
-(1, 'Yasmine', 'Znatn', 'Jass@gmail.com', '123456789'),
-(2, 'Saad', 'Boukili', 'Saad@gmail.com', '123456789'),
-(3, 'Hamza', 'Berraho', 'Mizu@gmail.com', '123456789'),
-(4, 'Mohammed Amine', 'Farah', 'Amine@gmail.com', '123456789'),
-(5, 'saad', 'boukili', 'saadboukili66@gmail.com', '$2a$10$P6WqImRelt5hBncjpOT6je1LN8lPyI4bRNCF5ioLOVW5HFeS2HHLe'),
-(6, 'Yasmine', 'znatn', 'znatni.yasmine@gmail.com', '$2a$10$G1IiBUiWRXEZt.OlkUp8U.te6HLB3evuWWpc5fC2D5A9djWkMGOYm'),
-(7, 'adminName', 'adminLastname', 'admin@gmail.com', '$2a$10$jywdSFdONk866t7swd7gB.J1BaTgrr7dDukX8sd3AN2WBCk5mKpFK'),
-(8, 'saad2', 'boukili', 'saad@hotmail.com', '$2a$10$KrEGp6xGO2QzS5M9T5G33O8x6V57vN2oYyGdR9Uh275/ejQdgLZCK'),
 (9, 'rania', 'bouabid', 'rania@gmail.com', '$2a$10$aRNE1FPrqBRommBfj3V0GucfS05yHbb.IWfjwh9tkNRXPIhvnEe5C');
 
 -- --------------------------------------------------------

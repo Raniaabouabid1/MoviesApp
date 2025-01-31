@@ -4,8 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title th:text="${pageTitle}">Registration</title>
-
-	<!-- Tailwind + Flowbite + Chart.js -->
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
@@ -14,20 +12,14 @@
 	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="flex h-screen m-0 p-0">
-
-<!-- Left Half: Registration Form -->
 <div class="w-1/2 bg-light text-red-700 flex flex-col justify-center items-center p-10">
 	<h1 class="text-4xl font-bold mb-10">Join IMDB!</h1>
-
-	<!-- Success message -->
 	<div th:if="${param.success}"
 		 class="p-2 mb-4 text-sm text-green-700 w-1/2 rounded-3xl bg-green-100
               flex justify-center items-center"
 		 role="alert">
 		<span class="font-bold">You’ve successfully registered!</span>
 	</div>
-
-	<!-- ERROR: User already exists -->
 	<div th:if="${param.userExists}"
 		 class="p-2 mb-4 text-sm text-red-800 w-1/2 rounded-3xl bg-[#ffdbdc]
               flex justify-center items-center"
@@ -55,8 +47,6 @@
 					   class="flex-1 bg-light text-sm text-black-400 border-none outline-none">
 			</div>
 		</div>
-
-		<!-- Last Name -->
 		<div class="relative">
 			<label for="lastName" class="bg-light px-1 text-sm text-black-400">
 				Last Name
@@ -73,8 +63,6 @@
 					   class="flex-1 bg-light text-sm text-black-400 border-none outline-none">
 			</div>
 		</div>
-
-		<!-- Email -->
 		<div class="relative">
 			<label for="email" class="bg-light px-1 text-sm text-black-400">
 				Email
@@ -91,8 +79,6 @@
 					   class="flex-1 bg-light text-sm text-black-400 border-none outline-none">
 			</div>
 		</div>
-
-		<!-- Password -->
 		<div class="relative">
 			<label for="password" class="bg-light px-1 text-sm text-black-400">
 				Password
@@ -126,7 +112,6 @@
     </span>
 	</div>
 </div>
-
 <div class="w-1/2 bg-gray-200 flex items-center justify-center">
 	<img th:src="@{/images/log.jpg}" alt="Illustration" />
 </div>
