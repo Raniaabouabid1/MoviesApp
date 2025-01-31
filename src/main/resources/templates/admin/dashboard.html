@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans flex">
+<aside
+        class="group relative
+           w-16 hover:w-64  /* Collapsed vs. expanded width */
+           transition-all duration-300
+           bg-black text-gray-100
+           shadow-md flex flex-col justify-between
+           overflow-y-auto"
+id="sidebar"
+>
+    <div>
+       <div class="py-4 flex justify-center">
+            <img th:src="@{/images/userlogo.png}"
+                 alt="Logo"
+                 class="transition-all duration-300 w-8 group-hover:w-12" />
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li class="flex justify-center group-hover:justify-start px-5 py-2">
+                    <span class="hidden group-hover:block font-bold text-sm"
+                          th:text="${firstname + ' '+ lastname}"></span>
+                </li>
+                <li class="hover:bg-gray-700 flex items-center px-5 py-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9.75h15V10.5" />
+                    </svg>
+                    <a th:href="@{/admin}" class="ml-4 text-sm hidden group-hover:inline-block">
+                        Home of admin
+                    </a>
+                </li>
+                <li class="hover:bg-gray-700 flex items-center px-5 py-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9.75h15V10.5" />
+                    </svg>
+                    <a th:href="@{/home}" class="ml-4 text-sm hidden group-hover:inline-block">
+                        Movie Display
+                    </a>
+                </li>
+                <li class="hover:bg-gray-700 flex items-center px-5 py-2">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M8 6h8m-8-2h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+                    </svg>
+                    <a th:href="@{/adminMovies}" class="ml-4 text-sm hidden group-hover:inline-block">
+                        Movies Management
+                    </a>
+                </li>
+                <li class="hover:bg-gray-700 flex items-center px-5 py-2">
+                    <img th:src="@{/images/dashboard.png}" alt="Dashboard Icon" class="w-5 h-5 mb-4">
+                    <a th:href="@{/dashboard}" class="ml-4 text-sm hidden group-hover:inline-block">
+                        Dashboard
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="py-4 px-4 flex justify-center group-hover:justify-start">
+        <a th:href="@{/logout}"
+           class="flex items-center gap-2 text-gray-300 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-5 w-5"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7" />
+            </svg>
+            <span class="hidden group-hover:block text-sm">Logout</span>
+        </a>
+    </div>
+</aside>
+<div class="flex-1 flex flex-col">
+
+    <main class="bg-white rounded-l-lg shadow-lg w-full flex flex-col overflow-y-auto">
+        <section class="px-7 py-6 pr-8 flex justify-between items-center">
+            <h2 class="text-3xl font-medium text-gray-800">
+                Ratings &amp; Recommendations Dashboard
+            </h2>
+        </section>
+        <div class="px-7 grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700">Total Users</h2>
+                <p class="text-4xl font-bold text-blue-500" id="totalUsers">0</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700">Average Rating</h2>
+                <p class="text-4xl font-bold text-yellow-500" id="avgRating">0.0</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700">Total Reviews</h2>
+                <p class="text-4xl font-bold text-green-500" id="totalReviews">0</p>
+            </div>
+        </div>
+        <div class="px-7 grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700">Best Rated Movie</h2>
+                <p class="text-2xl font-bold text-blue-500 mt-2" id="bestRatedMovie">Spirited Away</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-gray-700">Worst Rated Movie</h2>
+                <p class="text-2xl font-bold text-pink-500 mt-2" id="worstRatedMovie">Cherley and the Angles</p>
+            </div>
+        </div>
+        <div class="px-7 grid grid-cols-1 gap-6 mb-10">
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">Rating Distribution</h2>
+                <canvas id="ratingChart" class="w-full mt-4"></canvas>
+            </div>
+        </div>
+    </main>
+</div>
+<script>
+    async function fetchDashboardData() {
+        try {
+            const response = await fetch('/api/dashboard');
+            if (!response.ok) {
+                console.error("Failed to fetch rating dashboard stats:", response.statusText);
+                return;
+            }
+            const data = await response.json();
+
+            document.getElementById('totalUsers').textContent = data.totalUsers;
+            document.getElementById('avgRating').textContent = data.avgRating.toFixed(1);
+            document.getElementById('totalReviews').textContent = data.totalReviews;
+
+            document.getElementById('bestRatedMovie').textContent = data.bestRatedMovie;
+            document.getElementById('worstRatedMovie').textContent = data.worstRatedMovie;
+
+            const ratingChart = new Chart(document.getElementById('ratingChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'],
+                    datasets: [{
+                        label: 'Number of Ratings',
+                        data: data.ratingDistribution,
+                        backgroundColor: [
+                            '#ff4d4f', '#ffa940', '#ffd666', '#91d5ff', '#bae637'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Movies',
+                                color: '#333'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Rating Stars',
+                                color: '#333'
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error fetching rating dashboard data:", error);
+        }
+    }
+    fetchDashboardData();
+</script>
+</body>
+</html>
